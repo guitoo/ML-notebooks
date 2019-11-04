@@ -1,7 +1,9 @@
 jupyter
+jupyterthemes
 pandas==0.24.2
 pandas_ml
 sklearn
 matplotlib
 kaggle
 bigml
+rise
