@@ -1,5 +1,7 @@
 jupyter
 jupyterthemes
+nbdime
+jupyter_contrib_nbextensions
 pandas==0.24.2
 pandas_ml
 sklearn
