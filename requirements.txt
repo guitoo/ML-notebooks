@@ -6,6 +6,7 @@ qgrid
 pandas==0.24.2
 pandas_ml
 sklearn
+xgboost==0.80
 matplotlib
 kaggle
 bigml
