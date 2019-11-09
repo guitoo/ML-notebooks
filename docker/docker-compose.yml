@@ -15,15 +15,15 @@ services:
       options:
         max-size: 50m
     ports:
-      - "8888:8888"
+      - "8891:8891"
       - "6006:6006"
     volumes:
       - ../:/home/devel/handson-ml2
-    command: /opt/conda/bin/jupyter notebook --ip='0.0.0.0' --port=8888 --no-browser --allow-root
+    command: /opt/conda/envs/tf2/bin/jupyter notebook --ip='0.0.0.0' --port=8891 --no-browser --allow-root
     env_file:
-      - auth.env
-    environment: 
-      - BIGML_USERNAME
-      - BIGML_API_KEY
-      - KAGGLE_USERNAME
-      - KAGGLE_KEY
+      - ../.env
+#    environment: 
+#      - BIGML_USERNAME
+#      - BIGML_API_KEY
+#      - KAGGLE_USERNAME
+#      - KAGGLE_KEY
