@@ -1,10 +1,27 @@
 #!/bin/bash
 
 PIDFile=./.notebook.pid
+EXEC_NAME="notebook.sh"
 
+
+getpid (){
+    if [[ -f "$PIDFile" ]]; then
+	pid=$(cat $PIDFile)
+	if [[ ! -f "/proc/${pid}" ]]; then
+	    echo 'stale pid'
+	    dump
+	    unset pid
+	elif [[ ! -f "/proc/${pid}/cwd/${EXEC_NAME}" ]]; then
+	    echo 'pid has been recycled'
+	    dump
+	    unset pid
+	fi
+    fi
+}
 
 start (){
-    if [[ -f "$PIDFile" ]]; then
+    getpid
+    if [[ -f "/proc/${pid}" && -z "${pid+x}" ]]; then
 	echo 'notebook already started'
     else
 	echo 'starting notebook'
@@ -31,12 +48,14 @@ restart (){
     start
 }
 
-reset (){
+
+
+dump (){
     rm $PIDFile
 }
 
 usage (){
-  echo './notebook.sh {start|stop|restart|reset}'
+  echo './notebook.sh {start|stop|restart|dump}'
 }
 
 
@@ -49,6 +68,9 @@ case "$1" in
 	;;
     restart)
 	restart
+	;;
+    dump)
+	dump
 	;;
     *)
 	usage
