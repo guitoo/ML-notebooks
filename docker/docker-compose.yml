@@ -1,0 +1,24 @@
+version: "3"
+services:
+  give-me-some-credit:
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile
+      args:
+        - username=devel
+        - userid=1000
+    container_name: give-me-some-credit
+    image: give-me-some-credit
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+    ports:
+      - "8888:8888"
+      - "6006:6006"
+    volumes:
+      - ../:/home/devel/handson-ml2
+    command: /opt/conda/bin/jupyter notebook --ip='0.0.0.0' --port=8888 --no-browser --allow-root
+    env_file:
+      - auth.env
