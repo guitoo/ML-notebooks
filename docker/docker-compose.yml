@@ -21,7 +21,7 @@ services:
       - ../:/home/devel/handson-ml2
     command: /opt/conda/envs/tf2/bin/jupyter notebook --ip='0.0.0.0' --port=8891 --no-browser --allow-root
     env_file:
-      - ../.env
+      - ./auth.env
 #    environment: 
 #      - BIGML_USERNAME
 #      - BIGML_API_KEY
